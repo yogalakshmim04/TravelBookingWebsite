@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Europe — Wanderlust Travel</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <style>
+    .region-hero{min-height:55vh;background:linear-gradient(135deg,rgba(13,17,23,0.82),rgba(26,35,50,0.88)),url('https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=1400&q=80') center/cover no-repeat;display:flex;align-items:center;padding-top:90px;}
+    .country-card{background:var(--card-bg);border:1px solid var(--glass-border);border-radius:20px;overflow:hidden;cursor:pointer;transition:all 0.4s;height:100%;}
+    .country-card:hover{transform:translateY(-10px);box-shadow:0 30px 60px rgba(0,0,0,0.4);border-color:var(--primary);}
+    .country-img{height:200px;width:100%;object-fit:cover;transition:transform 0.6s;}
+    .country-card:hover .country-img{transform:scale(1.1);}
+    .city-card{background:var(--card-bg);border:1px solid var(--glass-border);border-radius:16px;overflow:hidden;cursor:pointer;transition:all 0.4s;}
+    .city-card:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(0,0,0,0.3);border-color:var(--primary);}
+    .city-img{height:180px;width:100%;object-fit:cover;transition:transform 0.5s;}
+    .city-card:hover .city-img{transform:scale(1.08);}
+    .breadcrumb-custom{display:flex;align-items:center;gap:8px;font-size:0.85rem;color:var(--text-muted);margin-bottom:30px;flex-wrap:wrap;}
+    .breadcrumb-custom .bc-item{cursor:pointer;transition:color 0.3s;}
+    .breadcrumb-custom .bc-item:hover,.breadcrumb-custom .bc-active{color:var(--primary);}
+    .spot-carousel-img{width:100%;height:380px;object-fit:cover;border-radius:16px;}
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg fixed-top" style="background:rgba(13,17,23,0.97)!important;backdrop-filter:blur(14px);padding:14px 0;">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../index.html">
+      <svg width="32" height="32" viewBox="0 0 38 38" fill="none"><circle cx="19" cy="19" r="18" stroke="#e8a87c" stroke-width="1.5" fill="rgba(232,168,124,0.08)"/><path d="M19 7C19 7 27 14 27 20.5C27 25.5 23.5 29 19 29C14.5 29 11 25.5 11 20.5C11 14 19 7 19 7Z" fill="#e8a87c" opacity="0.85"/><circle cx="19" cy="20" r="3.8" fill="#0d1117"/><line x1="9" y1="19" x2="29" y2="19" stroke="#e8a87c" stroke-width="1" opacity="0.4"/></svg>
+      <span class="brand-name">Wander<span>lust</span></span>
+    </a>
+    <a href="../index.html" class="btn-primary-custom ms-auto" style="font-size:0.82rem;padding:8px 18px;">← Back to Home</a>
+  </div>
+</nav>
+
+<div class="region-hero">
+  <div class="container">
+    <p style="color:var(--primary);text-transform:uppercase;letter-spacing:3px;font-size:0.8rem;font-weight:600;margin-bottom:10px;">Explore</p>
+    <h1 style="font-family:'Playfair Display',serif;font-size:clamp(2.5rem,6vw,5rem);color:var(--text-light);margin-bottom:16px;">Beautiful <span style="color:var(--primary);font-style:italic;">Europe</span></h1>
+    <p style="color:var(--text-muted);font-size:1rem;max-width:500px;">From the Eiffel Tower to the Colosseum — Europe's timeless beauty, rich culture, and legendary cuisine await you at every corner.</p>
+  </div>
+</div>
+
+<section style="padding:80px 0;background:var(--dark2);">
+  <div class="container">
+    <div class="breadcrumb-custom" id="breadcrumb">
+      <span class="bc-item bc-active" onclick="showCountries()">🌍 Europe</span>
+    </div>
+    <div id="countriesSection">
+      <div class="text-center mb-5"><span class="section-label">Choose a Country</span><h2 class="section-title">Explore Europe</h2><div class="accent-line"></div><p class="section-subtitle">Select a country to discover its most iconic cities and destinations</p></div>
+      <div class="row g-4" id="countriesGrid"></div>
+    </div>
+    <div id="citiesSection" style="display:none;">
+      <div class="text-center mb-5"><span class="section-label" id="citiesLabel"></span><h2 class="section-title" id="citiesTitle"></h2><div class="accent-line"></div><p class="section-subtitle" id="citiesSubtitle"></p></div>
+      <div class="row g-4" id="citiesGrid"></div>
+    </div>
+    <div id="spotDetail" style="display:none;">
+      <div class="row g-4">
+        <div class="col-lg-8">
+          <div id="spotCarousel" class="carousel slide mb-4" data-bs-ride="carousel">
+            <div class="carousel-indicators" id="spotIndicators"></div>
+            <div class="carousel-inner" id="spotInner"></div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#spotCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+            <button class="carousel-control-next" type="button" data-bs-target="#spotCarousel" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div style="background:var(--card-bg);border:1px solid var(--glass-border);border-radius:20px;padding:30px;position:sticky;top:100px;">
+            <h3 style="font-family:'Playfair Display',serif;font-size:1.8rem;margin-bottom:12px;" id="spotName"></h3>
+            <p style="color:var(--text-muted);font-size:0.88rem;line-height:1.8;margin-bottom:24px;" id="spotDesc"></p>
+            <div class="dest-detail mb-3"><i class="bi bi-cash-coin"></i><span id="spotPrice"></span></div>
+            <div class="dest-detail mb-3"><i class="bi bi-clock"></i><span id="spotDuration"></span></div>
+            <div class="dest-detail mb-4"><i class="bi bi-calendar3"></i><span id="spotSeason"></span></div>
+            <button class="btn-outline-custom w-100 d-block text-center mb-3" style="margin-left:0;" onclick="show1(cur.id)">← Back to Cities</button>
+          <button class="btn-primary-custom w-100 d-block text-center" onclick="bookSpot()">✈ Book This Trip</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Booking + Success Modals -->
+<div class="modal fade" id="bookingModal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content booking-modal-content">
+      <div class="modal-header booking-modal-header">
+        <div><h5 class="modal-title booking-modal-title">✈ Book Your European Trip</h5><p class="booking-modal-sub">Fill in your details below!</p></div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body booking-body">
+        <div class="booking-steps mb-4">
+          <div class="step active" id="step1dot"><span class="step-num">1</span> Personal</div>
+          <div class="step-line"></div><div class="step" id="step2dot"><span class="step-num">2</span> Trip</div>
+          <div class="step-line"></div><div class="step" id="step3dot"><span class="step-num">3</span> Confirm</div>
+        </div>
+        <div id="bookStep1">
+          <h6 class="step-section-title"><i class="bi bi-person-fill"></i> Personal Information</h6>
+          <div class="row g-3">
+            <div class="col-md-6"><label class="form-label-custom">Full Name *</label><input type="text" class="form-input-custom" id="bkName" placeholder="e.g. John Smith"/></div>
+            <div class="col-md-6"><label class="form-label-custom">Email Address *</label><input type="email" class="form-input-custom" id="bkEmail" placeholder="john@email.com"/></div>
+            <div class="col-md-6"><label class="form-label-custom">Phone Number *</label><input type="tel" class="form-input-custom" id="bkPhone" placeholder="+44 123 456 7890"/></div>
+            <div class="col-md-6"><label class="form-label-custom">Full Address *</label><input type="text" class="form-input-custom" id="bkAddress" placeholder="Street, City, Country"/></div>
+          </div>
+          <div class="d-flex justify-content-end mt-4"><button class="btn-primary-custom" onclick="goStep(2)">Next →</button></div>
+        </div>
+        <div id="bookStep2" style="display:none;">
+          <h6 class="step-section-title"><i class="bi bi-airplane-fill"></i> Trip Details</h6>
+          <div class="row g-3">
+            <div class="col-md-6"><label class="form-label-custom">Destination *</label><input type="text" class="form-input-custom" id="bkDestination" placeholder="e.g. Paris, France"/></div>
+            <div class="col-md-6"><label class="form-label-custom">Travel Date *</label><input type="date" class="form-input-custom" id="bkDate"/></div>
+            <div class="col-md-6"><label class="form-label-custom">Number of Days *</label><input type="number" class="form-input-custom" id="bkDays" placeholder="e.g. 7" min="1"/></div>
+            <div class="col-md-6"><label class="form-label-custom">Number of Travelers *</label><input type="number" class="form-input-custom" id="bkPersons" placeholder="e.g. 2" min="1"/></div>
+            <div class="col-12"><label class="form-label-custom">Mode of Transport *</label><div class="transport-options"><label class="transport-opt"><input type="radio" name="transport" value="✈ Flight"/><span>✈ Flight</span></label><label class="transport-opt"><input type="radio" name="transport" value="🚂 Eurostar Train"/><span>🚂 Eurostar</span></label><label class="transport-opt"><input type="radio" name="transport" value="🚌 Bus"/><span>🚌 Bus</span></label><label class="transport-opt"><input type="radio" name="transport" value="🚗 Car"/><span>🚗 Car</span></label></div></div>
+          </div>
+          <div class="d-flex justify-content-between mt-4"><button class="btn-outline-custom" style="margin-left:0;" onclick="goStep(1)">← Back</button><button class="btn-primary-custom" onclick="goStep(3)">Confirm →</button></div>
+        </div>
+        <div id="bookStep3" style="display:none;">
+          <h6 class="step-section-title"><i class="bi bi-check-circle-fill"></i> Booking Summary</h6>
+          <div class="booking-summary" id="bookingSummary"></div>
+          <div class="d-flex justify-content-between mt-4"><button class="btn-outline-custom" style="margin-left:0;" onclick="goStep(2)">← Back</button><button class="btn-primary-custom" onclick="submitBooking()"><i class="bi bi-check2-circle me-2"></i>Confirm Booking</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="successOverlay" class="success-overlay" style="display:none;">
+  <div class="success-box"><div class="success-anim">✈</div><h3 class="success-title">Booking Confirmed! 🎉</h3><p class="success-subtitle">We'll contact you on your email & phone shortly!</p><div class="success-details" id="successDetails"></div><button class="btn-primary-custom mt-4" onclick="closeSuccess()">Merci! Danke! Grazie! 🌍</button></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+const europeData = {
+  countries:[
+    {id:'france',name:'France',flag:'🇫🇷',tag:'Land of Romance',img:'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=600&q=80',desc:'Eiffel Tower, wine, art, and world-class cuisine',cities:['paris','nice','lyon']},
+    {id:'italy',name:'Italy',flag:'🇮🇹',tag:'Eternal Beauty',img:'https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=600&q=80',desc:'Colosseum, gondolas, pizza and Renaissance art',cities:['rome','venice','florence']},
+    {id:'switzerland',name:'Switzerland',flag:'🇨🇭',tag:'Alpine Paradise',img:'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80',desc:'Snow Alps, chocolate, lakes and luxury watches',cities:['interlaken','zurich','lucerne']},
+    {id:'spain',name:'Spain',flag:'🇪🇸',tag:'Passionate Culture',img:'https://images.unsplash.com/photo-1543783207-ec64e4d95325?w=600&q=80',desc:'Flamenco, bullfighting, Sagrada Familia, tapas',cities:['barcelona','madrid','seville']},
+    {id:'greece',name:'Greece',flag:'🇬🇷',tag:'Cradle of Civilization',img:'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=600&q=80',desc:'Santorini sunsets, Acropolis and Mediterranean blue',cities:['santorini','athens','mykonos']},
+    {id:'uk',name:'United Kingdom',flag:'🇬🇧',tag:'Royal Heritage',img:'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=600&q=80',desc:'Big Ben, castles, pubs and the Scottish Highlands',cities:['london','edinburgh','bath']},
+  ],
+  cities:{
+    paris:{name:'Paris',country:'France 🇫🇷',price:'$1,299',duration:'5 Days',season:'Apr–Oct',desc:'The City of Love. Eiffel Tower, Louvre, Seine River walks, and world-renowned cuisine make Paris a timeless masterpiece of culture and romance.',imgs:[{url:'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80',label:'🗼 Eiffel Tower'},{url:'https://images.unsplash.com/photo-1499856871958-5b9357976b82?w=800&q=80',label:'🌆 Paris at Night'},{url:'https://images.unsplash.com/photo-1550340499-a6c60fc8287c?w=800&q=80',label:'🍷 Parisian Restaurant'},{url:'https://images.unsplash.com/photo-1431274172761-fca41d930114?w=800&q=80',label:'☕ Café Culture'}]},
+    nice:{name:'Nice',country:'France 🇫🇷',price:'$1,099',duration:'4 Days',season:'May–Sep',desc:'The jewel of the French Riviera. Nice dazzles with its azure Mediterranean coastline, Belle Époque architecture, open-air markets, and the famous Promenade des Anglais.',imgs:[{url:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',label:'🌊 Nice Promenade'},{url:'https://images.unsplash.com/photo-1534430480872-3498386e7856?w=800&q=80',label:'🏖️ Côte d\'Azur Beach'},{url:'https://images.unsplash.com/photo-1555993539-1732b0258235?w=800&q=80',label:'🥗 French Riviera Dining'},{url:'https://images.unsplash.com/photo-1565967511849-76a60a516170?w=800&q=80',label:'🎨 Old Town Nice'}]},
+    rome:{name:'Rome',country:'Italy 🇮🇹',price:'$1,199',duration:'5 Days',season:'Apr–Jun, Sep–Nov',desc:'The Eternal City. The Colosseum, Vatican, Trevi Fountain, and authentic Roman pasta — Rome is an open-air museum that has inspired the world for millennia.',imgs:[{url:'https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=800&q=80',label:'🏛️ The Colosseum'},{url:'https://images.unsplash.com/photo-1531572753322-ad063cecc140?w=800&q=80',label:'⛪ Vatican City'},{url:'https://images.unsplash.com/photo-1529154166925-574a0236a4f4?w=800&q=80',label:'⛲ Trevi Fountain'},{url:'https://images.unsplash.com/photo-1555992336-03a23c7b20ee?w=800&q=80',label:'🍕 Authentic Roman Pizza'}]},
+    venice:{name:'Venice',country:'Italy 🇮🇹',price:'$1,349',duration:'4 Days',season:'Mar–Jun, Sep–Nov',desc:'Built on water, Venice is utterly unique. Gondola rides through romantic canals, Carnival masks, St. Mark\'s Basilica, and fresh seafood risotto await you.',imgs:[{url:'https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=800&q=80',label:'🚤 Venice Grand Canal'},{url:'https://images.unsplash.com/photo-1559564736-5f62a1a0d46e?w=800&q=80',label:'🎭 Venice Carnival'},{url:'https://images.unsplash.com/photo-1534430480872-3498386e7856?w=800&q=80',label:'🏛️ St. Mark\'s Basilica'},{url:'https://images.unsplash.com/photo-1549995659-0ff3fb1f5a83?w=800&q=80',label:'🦀 Venetian Seafood'}]},
+    interlaken:{name:'Interlaken',country:'Switzerland 🇨🇭',price:'$1,799',duration:'5 Days',season:'Jun–Sep & Dec–Mar',desc:'Surrounded by two turquoise lakes and the majestic Jungfrau peak, Interlaken is the adventure hub of Switzerland — skiing, paragliding, and breathtaking Alpine scenery.',imgs:[{url:'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',label:'🏔️ Jungfrau Peak'},{url:'https://images.unsplash.com/photo-1531210483974-4f8c1f33fd35?w=800&q=80',label:'🏔️ Alpine Village'},{url:'https://images.unsplash.com/photo-1573074617613-fc8ef27eaa2f?w=800&q=80',label:'🚂 Bernina Express Train'},{url:'https://images.unsplash.com/photo-1516912481808-3406841bd33c?w=800&q=80',label:'🎿 Skiing & Snow Sports'}]},
+    barcelona:{name:'Barcelona',country:'Spain 🇪🇸',price:'$1,249',duration:'5 Days',season:'May–Jun, Sep–Oct',desc:'Gaudí\'s architectural masterpieces, vibrant La Rambla, tapas bars, Barceloneta beach, and electric nightlife — Barcelona is one of Europe\'s most exciting cities.',imgs:[{url:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',label:'⛪ Sagrada Família'},{url:'https://images.unsplash.com/photo-1543783207-ec64e4d95325?w=800&q=80',label:'🌆 Barcelona Skyline'},{url:'https://images.unsplash.com/photo-1559564736-5f62a1a0d46e?w=800&q=80',label:'🏖️ Barceloneta Beach'},{url:'https://images.unsplash.com/photo-1555992336-03a23c7b20ee?w=800&q=80',label:'🥘 Tapas & Paella'}]},
+    santorini:{name:'Santorini',country:'Greece 🇬🇷',price:'$1,399',duration:'5 Days',season:'Jun–Sep',desc:'Iconic blue-domed churches, dramatic caldera cliffs, volcanic black beaches, and sunsets from Oia that paint the entire sky in shades of gold and crimson.',imgs:[{url:'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&q=80',label:'🌅 Oia Sunset'},{url:'https://images.unsplash.com/photo-1504512485720-7d83a16ee930?w=800&q=80',label:'⛪ Blue Dome Churches'},{url:'https://images.unsplash.com/photo-1533105079780-92b9be482077?w=800&q=80',label:'⛵ Aegean Sea Cruise'},{url:'https://images.unsplash.com/photo-1555993539-1732b0258235?w=800&q=80',label:'🍷 Cliffside Dining'}]},
+    london:{name:'London',country:'United Kingdom 🇬🇧',price:'$1,499',duration:'6 Days',season:'Apr–Sep',desc:'Big Ben, Buckingham Palace, the Tower of London, world-class museums and West End theatre — London is a global capital where history and modernity collide spectacularly.',imgs:[{url:'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&q=80',label:'🏛️ Tower Bridge London'},{url:'https://images.unsplash.com/photo-1529655683826-aba9b3e77383?w=800&q=80',label:'👑 Buckingham Palace'},{url:'https://images.unsplash.com/photo-1486299267070-83823f5448dd?w=800&q=80',label:'🎡 London Eye'},{url:'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800&q=80',label:'🍺 London Pub Life'}]},
+    florence:{name:'Florence',country:'Italy 🇮🇹',price:'$1,150',duration:'4 Days',season:'Apr–Jun, Sep–Oct',desc:'The birthplace of the Renaissance. Florence enchants with Michelangelo\'s David, the Uffizi Gallery, medieval bridges, Brunelleschi\'s dome, and extraordinary Tuscan cuisine.',imgs:[{url:'https://images.unsplash.com/photo-1541370976299-4d24ebbc9077?w=800&q=80',label:'🏛️ Florence Cathedral'},{url:'https://images.unsplash.com/photo-1568515387631-8b650bbcdb90?w=800&q=80',label:'🌉 Ponte Vecchio'},{url:'https://images.unsplash.com/photo-1555992336-03a23c7b20ee?w=800&q=80',label:'🖼️ Uffizi Gallery'},{url:'https://images.unsplash.com/photo-1559564736-5f62a1a0d46e?w=800&q=80',label:'🍷 Tuscan Wine & Pasta'}]},
+  }
+};
+
+let currentCountry=null, currentSpot=null;
+
+function showCountries(){
+  document.getElementById('countriesSection').style.display='block';
+  document.getElementById('citiesSection').style.display='none';
+  document.getElementById('spotDetail').style.display='none';
+  document.getElementById('breadcrumb').innerHTML=`<span class="bc-item bc-active" onclick="showCountries()">🌍 Europe</span>`;
+  const g=document.getElementById('countriesGrid');
+  g.innerHTML=europeData.countries.map(c=>`
+    <div class="col-lg-4 col-md-6">
+      <div class="country-card" onclick="showCities('${c.id}')">
+        <img src="${c.img}" class="country-img" alt="${c.name}"/>
+        <div style="padding:22px;">
+          <p style="color:var(--primary);font-size:0.72rem;text-transform:uppercase;letter-spacing:2px;margin-bottom:6px;">${c.flag} ${c.tag}</p>
+          <h3 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:8px;">${c.name}</h3>
+          <p style="color:var(--text-muted);font-size:0.82rem;">${c.desc}</p>
+          <div style="margin-top:14px;color:var(--primary);font-size:0.85rem;font-weight:600;">Explore ${c.cities.length} Cities →</div>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function showCities(cId){
+  currentCountry=europeData.countries.find(c=>c.id===cId);
+  document.getElementById('countriesSection').style.display='none';
+  document.getElementById('citiesSection').style.display='block';
+  document.getElementById('spotDetail').style.display='none';
+  document.getElementById('breadcrumb').innerHTML=`<span class="bc-item" onclick="showCountries()">🌍 Europe</span><span style="opacity:0.4;margin:0 6px;">›</span><span class="bc-item bc-active">${currentCountry.flag} ${currentCountry.name}</span>`;
+  document.getElementById('citiesLabel').textContent=currentCountry.tag;
+  document.getElementById('citiesTitle').textContent='Explore '+currentCountry.name;
+  document.getElementById('citiesSubtitle').textContent=currentCountry.desc;
+  const g=document.getElementById('citiesGrid');
+  g.innerHTML=currentCountry.cities.map(cid=>{
+    const c=europeData.cities[cid]; if(!c) return '';
+    return `<div class="col-lg-4 col-md-6"><div class="city-card" onclick="showSpot('${cid}')"><img src="${c.imgs[0].url}" class="city-img" alt="${c.name}"/><div style="padding:18px;"><p style="color:var(--primary);font-size:0.72rem;text-transform:uppercase;letter-spacing:2px;margin-bottom:6px;">${c.country}</p><h4 style="font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:8px;">${c.name}</h4><p style="color:var(--text-muted);font-size:0.82rem;margin-bottom:12px;">${c.desc.slice(0,80)}...</p><div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--glass-border);padding-top:12px;"><span style="font-family:'Playfair Display',serif;color:var(--primary);">${c.price}</span><span style="color:var(--text-muted);font-size:0.78rem;">${c.duration}</span></div></div></div></div>`;
+  }).join('');
+}
+
+function showSpot(cid){
+  currentSpot=europeData.cities[cid];
+  document.getElementById('citiesSection').style.display='none';
+  document.getElementById('spotDetail').style.display='block';
+  document.getElementById('breadcrumb').innerHTML=`<span class="bc-item" onclick="showCountries()">🌍 Europe</span><span style="opacity:0.4;margin:0 6px;">›</span><span class="bc-item" onclick="showCities('${currentCountry.id}')">${currentCountry.name}</span><span style="opacity:0.4;margin:0 6px;">›</span><span class="bc-item bc-active">${currentSpot.name}</span>`;
+  document.getElementById('spotName').textContent=currentSpot.name;
+  document.getElementById('spotDesc').textContent=currentSpot.desc;
+  document.getElementById('spotPrice').textContent=currentSpot.price+' per person';
+  document.getElementById('spotDuration').textContent=currentSpot.duration;
+  document.getElementById('spotSeason').textContent='Best: '+currentSpot.season;
+  const ind=document.getElementById('spotIndicators'), inn=document.getElementById('spotInner');
+  ind.innerHTML=''; inn.innerHTML='';
+  currentSpot.imgs.forEach((img,i)=>{
+    const dot=document.createElement('button'); dot.type='button'; dot.setAttribute('data-bs-target','#spotCarousel'); dot.setAttribute('data-bs-slide-to',i); dot.setAttribute('aria-label','Slide '+(i+1)); if(i===0){dot.classList.add('active');dot.setAttribute('aria-current','true');} ind.appendChild(dot);
+    const slide=document.createElement('div'); slide.className='carousel-item'+(i===0?' active':''); slide.style.position='relative'; slide.innerHTML=`<img src="${img.url}" class="spot-carousel-img" alt="${img.label}"/><div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent);padding:16px;border-radius:0 0 16px 16px;"><p style="margin:0;color:rgba(255,255,255,0.85);font-size:0.85rem;"><i class="bi bi-camera-fill me-2"></i>${img.label}</p></div>`; inn.appendChild(slide);
+  });
+}
+
+function bookSpot(){
+  document.getElementById('bkDestination').value=currentSpot?currentSpot.name+', '+currentSpot.country.replace(/[🇫🇷🇮🇹🇨🇭🇪🇸🇬🇷🇬🇧]/g,'').trim():'';
+  const today=new Date().toISOString().split('T')[0]; document.getElementById('bkDate').setAttribute('min',today);
+  goStep(1,true); new bootstrap.Modal(document.getElementById('bookingModal')).show();
+}
+
+function goStep(step,silent=false){
+  if(!silent&&step>1){if(step===2&&!validateStep1())return; if(step===3&&!validateStep2())return;}
+  ['bookStep1','bookStep2','bookStep3'].forEach(id=>document.getElementById(id).style.display='none');
+  ['step1dot','step2dot','step3dot'].forEach((id,i)=>document.getElementById(id).classList.toggle('active',i+1===step));
+  document.getElementById('bookStep'+step).style.display='block';
+  if(step===3)buildSummary();
+}
+function validateStep1(){const n=document.getElementById('bkName').value.trim(),e=document.getElementById('bkEmail').value.trim(),p=document.getElementById('bkPhone').value.trim(),a=document.getElementById('bkAddress').value.trim(); if(!n){alert('Enter name');return false;} if(!e||!/\S+@\S+\.\S+/.test(e)){alert('Enter valid email');return false;} if(!p){alert('Enter phone');return false;} if(!a){alert('Enter address');return false;} return true;}
+function validateStep2(){const d=document.getElementById('bkDestination').value.trim(),dt=document.getElementById('bkDate').value,dy=document.getElementById('bkDays').value,ps=document.getElementById('bkPersons').value,tr=document.querySelector('input[name="transport"]:checked'); if(!d||!dt||!dy||!ps||!tr){alert('Please fill all fields and select transport');return false;} return true;}
+function buildSummary(){
+  const n=document.getElementById('bkName').value.trim(),e=document.getElementById('bkEmail').value.trim(),p=document.getElementById('bkPhone').value.trim(),a=document.getElementById('bkAddress').value.trim();
+  const d=document.getElementById('bkDestination').value,dt=document.getElementById('bkDate').value,dy=document.getElementById('bkDays').value,ps=document.getElementById('bkPersons').value,tr=document.querySelector('input[name="transport"]:checked')?.value||'';
+  const priceNum=parseInt((currentSpot?.price||'$1000').replace(/[^0-9]/g,''));
+  const total=priceNum*parseInt(ps);
+  const dtf=dt?new Date(dt).toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'}):'';
+  document.getElementById('bookingSummary').innerHTML=`
+    <div class="summary-row"><span class="summary-label"><i class="bi bi-person-fill"></i> Name</span><span class="summary-value">${n}</span></div>
+    <div class="summary-row"><span class="summary-label"><i class="bi bi-envelope-fill"></i> Email</span><span class="summary-value">${e}</span></div>
+    <div class="summary-row"><span class="summary-label"><i class="bi bi-telephone-fill"></i> Phone</span><span class="summary-value">${p}</span></div>
+    <div class="summary-row"><span class="summary-label"><i class="bi bi-geo-alt-fill"></i> Address</span><span class="summary-value">${a}</span></div>
+    <div class="summary-row"><span class="summary-label"><i class="bi bi-map-fill"></i> Destination</span><span class="summary-value">${d}</span></div>
+    <div class="summary-row"><span class="summary-label"><i class="bi bi-calendar-event"></i> Date</span><span class="summary-value">${dtf}</span></div>
+    <div class="summary-row"><span class="summary-label"><i class="bi bi-moon-stars"></i> Days</span><span class="summary-value">${dy} Days</span></div>
+    <div class="summary-row"><span class="summary-label"><i class="bi bi-people-fill"></i> Travelers</span><span class="summary-value">${ps}</span></div>
+    <div class="summary-row"><span class="summary-label"><i class="bi bi-send-fill"></i> Transport</span><span class="summary-value">${tr}</span></div>
+    <div class="summary-total"><span class="label">💰 Total Estimated</span><span class="amount">$${total.toLocaleString()}</span></div>`;
+}
+function submitBooking(){
+  const n=document.getElementById('bkName').value.trim(),e=document.getElementById('bkEmail').value.trim(),d=document.getElementById('bkDestination').value,dt=document.getElementById('bkDate').value,dy=document.getElementById('bkDays').value,ps=document.getElementById('bkPersons').value,tr=document.querySelector('input[name="transport"]:checked')?.value||'';
+  const priceNum=parseInt((currentSpot?.price||'$1000').replace(/[^0-9]/g,''));
+  const total=priceNum*parseInt(ps);
+  const dtf=dt?new Date(dt).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}):'';
+  bootstrap.Modal.getInstance(document.getElementById('bookingModal'))?.hide();
+  setTimeout(()=>{
+    document.getElementById('successDetails').innerHTML=`<div class="success-detail-row"><span class="sk">👤</span><span class="sv">${n}</span></div><div class="success-detail-row"><span class="sk">📧</span><span class="sv">${e}</span></div><div class="success-detail-row"><span class="sk">🗺️</span><span class="sv">${d}</span></div><div class="success-detail-row"><span class="sk">📅</span><span class="sv">${dtf}</span></div><div class="success-detail-row"><span class="sk">🌙</span><span class="sv">${dy} Days · ${ps} Person(s)</span></div><div class="success-detail-row"><span class="sk">🚀</span><span class="sv">${tr}</span></div><div class="success-detail-row"><span class="sk">💰</span><span class="sv" style="font-size:1.1rem;">$${total.toLocaleString()}</span></div>`;
+    document.getElementById('successOverlay').style.display='flex';
+    document.body.style.overflow='hidden';
+  },400);
+}
+function closeSuccess(){document.getElementById('successOverlay').style.display='none';document.body.style.overflow='';}
+showCountries();
+</script>
+</body>
+</html>

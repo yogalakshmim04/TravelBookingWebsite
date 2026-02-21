@@ -1,0 +1,480 @@
+/* ============================================================
+   WANDERLUST — TRAVEL DESTINATION SHOWCASE
+   animations.css — All Animations & Keyframes
+   ============================================================ */
+
+/* ========================
+   HERO ENTRANCE ANIMATIONS
+======================== */
+
+/* Badge slides down from top */
+.hero-badge {
+  animation: fadeInDown 0.8s ease forwards;
+}
+
+/* Title rises up */
+.hero-title {
+  animation: fadeInUp 1s ease 0.2s both;
+}
+
+/* Description fades in */
+.hero-desc {
+  animation: fadeInUp 1s ease 0.4s both;
+}
+
+/* Buttons appear */
+.hero-buttons {
+  animation: fadeInUp 1s ease 0.6s both;
+}
+
+/* Stats slide up last */
+.hero-stats {
+  animation: fadeInUp 1s ease 0.8s both;
+}
+
+/* Image grid slides from right */
+.hero-image-grid {
+  animation: fadeInRight 1.2s ease 0.4s both;
+}
+
+/* ========================
+   KEYFRAME DEFINITIONS
+======================== */
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ========================
+   BACKGROUND BLOB ANIMATION
+======================== */
+
+@keyframes floatBlob {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(20px, -25px) scale(1.04);
+  }
+  66% {
+    transform: translate(-15px, 15px) scale(0.97);
+  }
+}
+
+/* ========================
+   FLOATING IMAGE ANIMATION
+======================== */
+
+@keyframes floatImg {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+.hero-img-float {
+  animation: floatImg 4s ease-in-out infinite;
+}
+
+.hero-img-badge {
+  animation: floatImg 5s ease-in-out infinite reverse;
+}
+
+/* ========================
+   PULSE GLOW ANIMATION
+======================== */
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(232, 168, 124, 0);
+  }
+  50% {
+    box-shadow: 0 0 0 12px rgba(232, 168, 124, 0.12);
+  }
+}
+
+.feature-icon {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+/* ========================
+   SHIMMER LOADING ANIMATION
+======================== */
+
+@keyframes shimmer {
+  0% {
+    background-position: -500px 0;
+  }
+  100% {
+    background-position: 500px 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--card-bg) 25%,
+    rgba(255,255,255,0.05) 50%,
+    var(--card-bg) 75%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 1.8s infinite linear;
+}
+
+/* ========================
+   SPINNER ANIMATION
+======================== */
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid var(--glass-border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
+
+/* ========================
+   BOUNCE ANIMATION
+======================== */
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(-16px);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+.bounce {
+  animation: bounce 1.5s infinite;
+}
+
+/* ========================
+   SCROLL DOWN INDICATOR
+======================== */
+
+@keyframes scrollDown {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  75% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+.scroll-indicator {
+  width: 28px;
+  height: 45px;
+  border: 2px solid var(--glass-border);
+  border-radius: 50px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.scroll-indicator::before {
+  content: '';
+  position: absolute;
+  top: 7px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--primary);
+  animation: scrollDown 1.8s infinite;
+}
+
+/* ========================
+   TYPEWRITER CURSOR
+======================== */
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+.typewriter-cursor::after {
+  content: '|';
+  color: var(--primary);
+  animation: blink 0.8s infinite;
+  margin-left: 3px;
+}
+
+/* ========================
+   CARD FLIP ANIMATION
+======================== */
+
+.flip-card {
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+  background: var(--card-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 30px;
+  text-align: center;
+}
+
+/* ========================
+   NUMBER COUNTER ANIMATION
+======================== */
+
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.stat-number {
+  animation: countUp 0.8s ease both;
+}
+
+/* ========================
+   RIPPLE EFFECT ON BUTTONS
+======================== */
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.btn-primary-custom {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary-custom::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.4);
+  opacity: 0;
+  border-radius: 50%;
+  transform: scale(0) translate(-50%, -50%);
+  transform-origin: top left;
+}
+
+.btn-primary-custom:active::after {
+  animation: ripple 0.5s ease-out;
+}
+
+/* ========================
+   NAVBAR SLIDE IN
+======================== */
+
+@keyframes navSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.navbar {
+  animation: navSlideDown 0.6s ease forwards;
+}
+
+/* ========================
+   TOAST NOTIFICATION
+======================== */
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+.toast-notification {
+  position: fixed;
+  bottom: 90px;
+  right: 32px;
+  background: var(--card-bg);
+  border: 1px solid var(--glass-border);
+  border-left: 4px solid var(--primary);
+  border-radius: 12px;
+  padding: 16px 24px;
+  color: var(--text-light);
+  font-size: 0.875rem;
+  z-index: 9999;
+  max-width: 300px;
+  animation: slideInRight 0.4s ease forwards;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.toast-notification.hiding {
+  animation: slideOutRight 0.4s ease forwards;
+}
+
+/* ========================
+   ACCENT LINE GROW
+======================== */
+
+@keyframes growLine {
+  from { width: 0; }
+  to   { width: 60px; }
+}
+
+.accent-line {
+  animation: growLine 0.8s ease 0.3s both;
+}
+
+/* ========================
+   SCROLL TOP BUTTON
+======================== */
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+#scrollTop.visible {
+  animation: popIn 0.3s ease forwards;
+}
+
+/* ========================
+   REDUCED MOTION SUPPORT
+======================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

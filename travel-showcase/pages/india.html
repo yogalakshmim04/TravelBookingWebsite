@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>India — Wanderlust Travel</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <style>
+    .region-hero{min-height:55vh;background:linear-gradient(135deg,rgba(13,17,23,0.85),rgba(26,35,50,0.9)),url('https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=1400&q=80') center/cover no-repeat;display:flex;align-items:center;padding-top:90px;}
+    .back-btn{display:inline-flex;align-items:center;gap:8px;color:var(--primary);text-decoration:none;font-size:0.85rem;font-weight:500;margin-bottom:20px;transition:all 0.3s;}
+    .back-btn:hover{color:var(--primary-dark);transform:translateX(-4px);}
+    .state-card{background:var(--card-bg);border:1px solid var(--glass-border);border-radius:20px;overflow:hidden;cursor:pointer;transition:all 0.4s;height:100%;}
+    .state-card:hover{transform:translateY(-10px);box-shadow:0 30px 60px rgba(0,0,0,0.4);border-color:var(--primary);}
+    .state-img{height:200px;width:100%;object-fit:cover;transition:transform 0.6s;}
+    .state-card:hover .state-img{transform:scale(1.1);}
+    .state-body{padding:22px;}
+    .state-name{font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:8px;}
+    .state-meta{color:var(--text-muted);font-size:0.82rem;}
+    .place-card{background:var(--card-bg);border:1px solid var(--glass-border);border-radius:16px;overflow:hidden;cursor:pointer;transition:all 0.4s;}
+    .place-card:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(0,0,0,0.3);border-color:var(--primary);}
+    .place-img{height:180px;width:100%;object-fit:cover;transition:transform 0.5s;}
+    .place-card:hover .place-img{transform:scale(1.08);}
+    .place-body{padding:18px;}
+    .breadcrumb-custom{display:flex;align-items:center;gap:8px;font-size:0.85rem;color:var(--text-muted);margin-bottom:30px;flex-wrap:wrap;}
+    .breadcrumb-custom .bc-item{cursor:pointer;transition:color 0.3s;}
+    .breadcrumb-custom .bc-item:hover,.breadcrumb-custom .bc-active{color:var(--primary);}
+    .breadcrumb-custom .bc-sep{opacity:0.4;}
+    #placesSection,#spotDetail{display:none;}
+    .spot-carousel-img{width:100%;height:400px;object-fit:cover;border-radius:16px;}
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg fixed-top scrolled" id="mainNav" style="background:rgba(13,17,23,0.97)!important;backdrop-filter:blur(14px);padding:14px 0;">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../index.html">
+      <svg width="32" height="32" viewBox="0 0 38 38" fill="none"><circle cx="19" cy="19" r="18" stroke="#e8a87c" stroke-width="1.5" fill="rgba(232,168,124,0.08)"/><path d="M19 7C19 7 27 14 27 20.5C27 25.5 23.5 29 19 29C14.5 29 11 25.5 11 20.5C11 14 19 7 19 7Z" fill="#e8a87c" opacity="0.85"/><circle cx="19" cy="20" r="3.8" fill="#0d1117"/><line x1="9" y1="19" x2="29" y2="19" stroke="#e8a87c" stroke-width="1" opacity="0.4"/></svg>
+      <span class="brand-name">Wander<span>lust</span></span>
+    </a>
+    <a href="../index.html" class="btn-primary-custom ms-auto" style="font-size:0.82rem;padding:8px 18px;">← Back to Home</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="region-hero">
+  <div class="container">
+    <a href="../index.html" class="back-btn"><i class="bi bi-arrow-left"></i> Back to Home</a>
+    <p style="color:var(--primary);text-transform:uppercase;letter-spacing:3px;font-size:0.8rem;font-weight:600;">Explore</p>
+    <h1 style="font-family:'Playfair Display',serif;font-size:clamp(2.5rem,6vw,5rem);color:var(--text-light);margin-bottom:16px;">Incredible <span style="color:var(--primary);font-style:italic;">India</span></h1>
+    <p style="color:var(--text-muted);font-size:1rem;max-width:500px;">From the snow-capped Himalayas to tropical backwaters — India is a universe of experiences waiting to be explored.</p>
+  </div>
+</div>
+
+<section style="padding:80px 0;background:var(--dark2);">
+  <div class="container">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb-custom" id="breadcrumb">
+      <span class="bc-item bc-active" onclick="showStates()">🇮🇳 India</span>
+    </div>
+
+    <!-- States Grid -->
+    <div id="statesSection">
+      <div class="text-center mb-5">
+        <span class="section-label">Explore By State</span>
+        <h2 class="section-title">Choose Your Destination</h2>
+        <div class="accent-line"></div>
+        <p class="section-subtitle">Pick a state to explore its most beautiful destinations</p>
+      </div>
+      <div class="row g-4" id="statesGrid"></div>
+    </div>
+
+    <!-- Places Grid -->
+    <div id="placesSection">
+      <div class="text-center mb-5">
+        <span class="section-label" id="placesLabel"></span>
+        <h2 class="section-title" id="placesTitle"></h2>
+        <div class="accent-line"></div>
+        <p class="section-subtitle" id="placesSubtitle"></p>
+      </div>
+      <div class="row g-4" id="placesGrid"></div>
+    </div>
+
+    <!-- Spot Detail -->
+    <div id="spotDetail">
+      <div class="row g-4">
+        <div class="col-lg-8">
+          <div id="spotCarousel" class="carousel slide mb-4" data-bs-ride="carousel">
+            <div class="carousel-indicators" id="spotIndicators"></div>
+            <div class="carousel-inner" id="spotInner"></div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#spotCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+            <button class="carousel-control-next" type="button" data-bs-target="#spotCarousel" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div style="background:var(--card-bg);border:1px solid var(--glass-border);border-radius:20px;padding:30px;position:sticky;top:100px;">
+            <h3 style="font-family:'Playfair Display',serif;font-size:1.8rem;margin-bottom:12px;" id="spotName"></h3>
+            <p style="color:var(--text-muted);font-size:0.88rem;line-height:1.8;margin-bottom:24px;" id="spotDesc"></p>
+            <div class="dest-detail mb-3"><i class="bi bi-cash-coin"></i><span id="spotPrice"></span></div>
+            <div class="dest-detail mb-3"><i class="bi bi-clock"></i><span id="spotDuration"></span></div>
+            <div class="dest-detail mb-4"><i class="bi bi-calendar3"></i><span id="spotSeason"></span></div>
+            <button class="btn-outline-custom w-100 d-block text-center mb-3" style="margin-left:0;" onclick="showPlaces(currentState.id)">← Back to States</button>
+            <button class="btn-primary-custom w-100 d-block text-center" onclick="bookSpot()">✈ Book This Place</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING + SUCCESS MODALS (reused) -->
+<div class="modal fade" id="bookingModal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content booking-modal-content">
+      <div class="modal-header booking-modal-header">
+        <div><h5 class="modal-title booking-modal-title">✈ Book Your Dream Trip</h5><p class="booking-modal-sub">Fill in your details below!</p></div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body booking-body">
+        <div class="booking-steps mb-4">
+          <div class="step active" id="step1dot"><span class="step-num">1</span> Personal</div>
+          <div class="step-line"></div>
+          <div class="step" id="step2dot"><span class="step-num">2</span> Trip</div>
+          <div class="step-line"></div>
+          <div class="step" id="step3dot"><span class="step-num">3</span> Confirm</div>
+        </div>
+        <div id="bookStep1">
+          <h6 class="step-section-title"><i class="bi bi-person-fill"></i> Personal Information</h6>
+          <div class="row g-3">
+            <div class="col-md-6"><label class="form-label-custom">Full Name *</label><input type="text" class="form-input-custom" id="bkName" placeholder="e.g. Arjun Kumar"/></div>
+            <div class="col-md-6"><label class="form-label-custom">Email Address *</label><input type="email" class="form-input-custom" id="bkEmail" placeholder="arjun@email.com"/></div>
+            <div class="col-md-6"><label class="form-label-custom">Phone Number *</label><input type="tel" class="form-input-custom" id="bkPhone" placeholder="+91 98765 43210"/></div>
+            <div class="col-md-6"><label class="form-label-custom">Full Address *</label><input type="text" class="form-input-custom" id="bkAddress" placeholder="Street, City, State"/></div>
+          </div>
+          <div class="d-flex justify-content-end mt-4"><button class="btn-primary-custom" onclick="goStep(2)">Next →</button></div>
+        </div>
+        <div id="bookStep2" style="display:none;">
+          <h6 class="step-section-title"><i class="bi bi-airplane-fill"></i> Trip Details</h6>
+          <div class="row g-3">
+            <div class="col-md-6"><label class="form-label-custom">Destination *</label><input type="text" class="form-input-custom" id="bkDestination" placeholder="e.g. Munnar, Kerala"/></div>
+            <div class="col-md-6"><label class="form-label-custom">Travel Date *</label><input type="date" class="form-input-custom" id="bkDate"/></div>
+            <div class="col-md-6"><label class="form-label-custom">Number of Days *</label><input type="number" class="form-input-custom" id="bkDays" placeholder="e.g. 5" min="1"/></div>
+            <div class="col-md-6"><label class="form-label-custom">Number of Travelers *</label><input type="number" class="form-input-custom" id="bkPersons" placeholder="e.g. 3" min="1"/></div>
+            <div class="col-12"><label class="form-label-custom">Mode of Transport *</label><div class="transport-options"><label class="transport-opt"><input type="radio" name="transport" value="✈ Flight"/><span>✈ Flight</span></label><label class="transport-opt"><input type="radio" name="transport" value="🚂 Train"/><span>🚂 Train</span></label><label class="transport-opt"><input type="radio" name="transport" value="🚌 Bus"/><span>🚌 Bus</span></label><label class="transport-opt"><input type="radio" name="transport" value="🚗 Car"/><span>🚗 Car</span></label></div></div>
+          </div>
+          <div class="d-flex justify-content-between mt-4"><button class="btn-outline-custom" style="margin-left:0;" onclick="goStep(1)">← Back</button><button class="btn-primary-custom" onclick="goStep(3)">Next: Confirm →</button></div>
+        </div>
+        <div id="bookStep3" style="display:none;">
+          <h6 class="step-section-title"><i class="bi bi-check-circle-fill"></i> Booking Summary</h6>
+          <div class="booking-summary" id="bookingSummary"></div>
+          <div class="d-flex justify-content-between mt-4"><button class="btn-outline-custom" style="margin-left:0;" onclick="goStep(2)">← Back</button><button class="btn-primary-custom" onclick="submitBooking()"><i class="bi bi-check2-circle me-2"></i>Confirm Booking</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="successOverlay" class="success-overlay" style="display:none;">
+  <div class="success-box"><div class="success-anim">✈</div><h3 class="success-title">Booking Successful! 🎉</h3><p class="success-subtitle">We'll contact you shortly on your email & phone!</p><div class="success-details" id="successDetails"></div><button class="btn-primary-custom mt-4" onclick="closeSuccess()">Awesome! 🌍</button></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+const indiaData = {
+  states: [
+    { id:'kerala', name:'Kerala', tag:'God\'s Own Country', img:'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=600&q=80', desc:'Backwaters, beaches, hill stations and spice gardens', places:['munnar','alleppey','wayanad','kovalam','thekkady'] },
+    { id:'rajasthan', name:'Rajasthan', tag:'Land of Kings', img:'https://images.unsplash.com/photo-1477587458883-47145ed31769?w=600&q=80', desc:'Majestic forts, desert safaris and royal palaces', places:['jaipur','udaipur','jodhpur','jaisalmer','pushkar'] },
+    { id:'himachal', name:'Himachal Pradesh', tag:'Heaven on Earth', img:'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=600&q=80', desc:'Snow-capped peaks, apple orchards and adventure sports', places:['manali','shimla','dharamsala','spiti','kasol'] },
+    { id:'goa', name:'Goa', tag:'Pearl of the East', img:'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=600&q=80', desc:'Golden beaches, vibrant nightlife and Portuguese heritage', places:['panaji','calangute','anjuna','palolem','dudhsagar'] },
+    { id:'tamilnadu', name:'Tamil Nadu', tag:'Classical South India', img:'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=600&q=80', desc:'Ancient temples, rich culture and coastal beauty', places:['ooty','kodaikanal','madurai','kanchipuram','rameswaram'] },
+    { id:'uttarakhand', name:'Uttarakhand', tag:'Dev Bhumi', img:'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80', desc:'Spiritual trails, glaciers and yoga capital of the world', places:['rishikesh','haridwar','mussoorie','nainital','auli'] },
+  ],
+  places: {
+    munnar:{ name:'Munnar', state:'Kerala', price:'₹15,000', duration:'3–4 Days', season:'Sep – Mar', desc:'A breathtaking hill station in the Western Ghats, blanketed with endless tea gardens, misty valleys, and rare wildlife. The Eravikulam National Park and Mattupetty Dam make Munnar a paradise for nature lovers.', imgs:[{url:'https://images.unsplash.com/photo-1547327132-2e9c8f5d43b3?w=800&q=80',label:'🌿 Munnar Tea Estates'},{url:'https://images.unsplash.com/photo-1580889660975-8f79f83e44a8?w=800&q=80',label:'🦌 Eravikulam Wildlife'},{url:'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80',label:'🍵 Tea Factory Tour'},{url:'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&q=80',label:'🌄 Misty Valleys'}] },
+    alleppey:{ name:'Alleppey (Backwaters)', state:'Kerala', price:'₹18,000', duration:'2–3 Days', season:'Oct – Feb', desc:'Known as the "Venice of the East", Alleppey offers iconic houseboat rides through serene backwater canals fringed with coconut palms. A Kerala experience like no other.', imgs:[{url:'https://images.unsplash.com/photo-1593693411515-c20261bcad6e?w=800&q=80',label:'🛶 Kerala Houseboat'},{url:'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80',label:'🌴 Backwater Canals'},{url:'https://images.unsplash.com/photo-1585135497273-1a86b09fe70e?w=800&q=80',label:'🌅 Backwater Sunset'},{url:'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=800&q=80',label:'🐟 Local Fish Cuisine'}] },
+    wayanad:{ name:'Wayanad', state:'Kerala', price:'₹12,000', duration:'3–4 Days', season:'Oct – May', desc:'A lush highland district of Kerala cloaked in dense forests, misty mountains, ancient caves, and cascading waterfalls. Wayanad is where tribal culture meets stunning natural wilderness.', imgs:[{url:'https://images.unsplash.com/photo-1564507592333-c60657eea523?w=800&q=80',label:'🌲 Wayanad Forest'},{url:'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800&q=80',label:'🌊 Soochipara Waterfall'},{url:'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=800&q=80',label:'🏛️ Edakkal Caves'},{url:'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&q=80',label:'🐘 Wildlife Sanctuary'}] },
+    kovalam:{ name:'Kovalam Beach', state:'Kerala', price:'₹10,000', duration:'2–3 Days', season:'Nov – Mar', desc:'A world-famous beach resort town near Thiruvananthapuram with three crescent beaches. Known for Ayurvedic treatments, lighthouses and spectacular sunsets over the Arabian Sea.', imgs:[{url:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80',label:'🌊 Kovalam Beach'},{url:'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80',label:'🏖️ Beach Sunset'},{url:'https://images.unsplash.com/photo-1590523278191-995cbcda646b?w=800&q=80',label:'🧘 Ayurvedic Spa'},{url:'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=800&q=80',label:'🌅 Lighthouse View'}] },
+    thekkady:{ name:'Thekkady / Periyar', state:'Kerala', price:'₹14,000', duration:'2–3 Days', season:'Oct – Jun', desc:'Home to the famous Periyar Wildlife Sanctuary, Thekkady is known for elephant sightings, bamboo rafting, spice plantation tours, and the pristine Periyar Lake.', imgs:[{url:'https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=800&q=80',label:'🐘 Periyar Elephant Park'},{url:'https://images.unsplash.com/photo-1572987669554-0ba2187e8054?w=800&q=80',label:'🌿 Spice Plantation'},{url:'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800&q=80',label:'🛶 Periyar Lake Boat'},{url:'https://images.unsplash.com/photo-1535503405674-3f7a4e840c6e?w=800&q=80',label:'🌳 Forest Trek'}] },
+    jaipur:{ name:'Jaipur', state:'Rajasthan', price:'₹16,000', duration:'3–4 Days', season:'Oct – Mar', desc:'The Pink City of India, Jaipur dazzles with magnificent forts, opulent palaces, bustling bazaars and Rajasthani cuisine that lingers long after you leave.', imgs:[{url:'https://images.unsplash.com/photo-1599661046289-e31897846e41?w=800&q=80',label:'🏰 Amber Fort Jaipur'},{url:'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=800&q=80',label:'🌸 Hawa Mahal Pink City'},{url:'https://images.unsplash.com/photo-1586800746888-e7fde8d43060?w=800&q=80',label:'🐪 Thar Desert Camel Safari'},{url:'https://images.unsplash.com/photo-1606298855672-3efb63017be8?w=800&q=80',label:'🍛 Rajasthani Dal Baati'}] },
+    manali:{ name:'Manali', state:'Himachal Pradesh', price:'₹20,000', duration:'5–6 Days', season:'May–Jun & Dec–Feb', desc:'Nestled in the Himalayas, Manali is the adventure capital of India — skiing, paragliding, trekking to Rohtang Pass, and the serene Solang Valley await you.', imgs:[{url:'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=800&q=80',label:'🏔️ Snow-Capped Himalayas'},{url:'https://images.unsplash.com/photo-1600354927651-af92cf4c1d24?w=800&q=80',label:'⛷️ Rohtang Pass Skiing'},{url:'https://images.unsplash.com/photo-1617059063910-bb5ba54eb5c5?w=800&q=80',label:'🌿 Solang Valley'},{url:'https://images.unsplash.com/photo-1596402184320-417e7178b2cd?w=800&q=80',label:'🛶 River Rafting Beas'}] },
+    panaji:{ name:'Panaji — North Goa', state:'Goa', price:'₹12,000', duration:'4–5 Days', season:'Nov – Feb', desc:'Experience Goa\'s vibrant nightlife, golden beaches, Portuguese-era churches, spice plantations, beach shacks and some of the best seafood in India at North Goa.', imgs:[{url:'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=800&q=80',label:'🏖️ Calangute Beach'},{url:'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=800&q=80',label:'🎉 Goa Nightlife'},{url:'https://images.unsplash.com/photo-1587474260584-136574528ed5?w=800&q=80',label:'⛪ Basilica of Bom Jesus'},{url:'https://images.unsplash.com/photo-1586375300773-8384e3e4916f?w=800&q=80',label:'🦞 Goan Seafood'}] },
+    ooty:{ name:'Ooty', state:'Tamil Nadu', price:'₹11,000', duration:'3–4 Days', season:'Apr – Jun', desc:'The Queen of Hill Stations, Ooty sits at 2,240 metres with cool misty air, tea gardens, the famous Nilgiri Mountain Railway toy train, and Botanical Gardens.', imgs:[{url:'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=800&q=80',label:'🌿 Ooty Tea Gardens'},{url:'https://images.unsplash.com/photo-1542401886-65d6c61db217?w=800&q=80',label:'🚂 Nilgiri Toy Train'},{url:'https://images.unsplash.com/photo-1595815771614-ade9d652a65d?w=800&q=80',label:'🌸 Botanical Gardens'},{url:'https://images.unsplash.com/photo-1564769662533-4f00a87b4056?w=800&q=80',label:'🏔️ Doddabetta Peak'}] },
+    rishikesh:{ name:'Rishikesh', state:'Uttarakhand', price:'₹13,000', duration:'3–4 Days', season:'Sep – Nov & Mar – May', desc:'The Yoga Capital of the World. Rishikesh offers white-water rafting on the Ganges, iconic suspension bridges, ashram meditation retreats, and breathtaking Himalayan sunrises.', imgs:[{url:'https://images.unsplash.com/photo-1591018533550-6b1d8e4d43f3?w=800&q=80',label:'🧘 Yoga on Ganges'},{url:'https://images.unsplash.com/photo-1600974474964-ef60d614c6d2?w=800&q=80',label:'🌊 Ganges River Rafting'},{url:'https://images.unsplash.com/photo-1590766740620-1ff2f72b4568?w=800&q=80',label:'🌉 Laxman Jhula Bridge'},{url:'https://images.unsplash.com/photo-1561361058-c24e3c86b4a7?w=800&q=80',label:'🏔️ Himalayan Sunrise'}] },
+  }
+};
+
+let currentState = null;
+let currentSpot = null;
+
+function showStates() {
+  document.getElementById('statesSection').style.display='block';
+  document.getElementById('placesSection').style.display='none';
+  document.getElementById('spotDetail').style.display='none';
+  document.getElementById('breadcrumb').innerHTML=`<span class="bc-item bc-active" onclick="showStates()">🇮🇳 India</span>`;
+  renderStates();
+}
+
+function renderStates() {
+  const grid = document.getElementById('statesGrid');
+  grid.innerHTML = indiaData.states.map(s=>`
+    <div class="col-lg-4 col-md-6">
+      <div class="state-card" onclick="showPlaces('${s.id}')">
+        <img src="${s.img}" class="state-img" alt="${s.name}"/>
+        <div class="state-body">
+          <p style="color:var(--primary);font-size:0.75rem;text-transform:uppercase;letter-spacing:2px;margin-bottom:6px;">${s.tag}</p>
+          <h3 class="state-name">${s.name}</h3>
+          <p class="state-meta">${s.desc}</p>
+          <div style="margin-top:14px;color:var(--primary);font-size:0.85rem;font-weight:600;">Explore ${s.places.length} Destinations →</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function showPlaces(stateId) {
+  currentState = indiaData.states.find(s=>s.id===stateId);
+  document.getElementById('statesSection').style.display='none';
+  document.getElementById('placesSection').style.display='block';
+  document.getElementById('spotDetail').style.display='none';
+  document.getElementById('breadcrumb').innerHTML=`
+    <span class="bc-item" onclick="showStates()">🇮🇳 India</span>
+    <span class="bc-sep">›</span>
+    <span class="bc-item bc-active">${currentState.name}</span>
+  `;
+  document.getElementById('placesLabel').textContent=currentState.tag;
+  document.getElementById('placesTitle').textContent=`Explore ${currentState.name}`;
+  document.getElementById('placesSubtitle').textContent=currentState.desc;
+
+  const grid = document.getElementById('placesGrid');
+  grid.innerHTML = currentState.places.map(pid=>{
+    const p = indiaData.places[pid];
+    if(!p) return '';
+    return `
+      <div class="col-lg-4 col-md-6">
+        <div class="place-card" onclick="showSpot('${pid}')">
+          <img src="${p.imgs[0].url}" class="place-img" alt="${p.name}"/>
+          <div class="place-body">
+            <p style="color:var(--primary);font-size:0.72rem;text-transform:uppercase;letter-spacing:2px;margin-bottom:6px;">${p.state}</p>
+            <h4 style="font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:8px;">${p.name}</h4>
+            <p style="color:var(--text-muted);font-size:0.82rem;margin-bottom:14px;">${p.desc.slice(0,80)}...</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--glass-border);padding-top:12px;">
+              <span style="font-family:'Playfair Display',serif;color:var(--primary);font-size:1.1rem;">${p.price}</span>
+              <span style="color:var(--text-muted);font-size:0.78rem;">${p.duration}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function showSpot(spotId) {
+  currentSpot = indiaData.places[spotId];
+  document.getElementById('placesSection').style.display='none';
+  document.getElementById('spotDetail').style.display='block';
+  document.getElementById('breadcrumb').innerHTML=`
+    <span class="bc-item" onclick="showStates()">🇮🇳 India</span>
+    <span class="bc-sep">›</span>
+    <span class="bc-item" onclick="showPlaces('${currentState.id}')">${currentState.name}</span>
+    <span class="bc-sep">›</span>
+    <span class="bc-item bc-active">${currentSpot.name}</span>
+  `;
+  document.getElementById('spotName').textContent=currentSpot.name;
+  document.getElementById('spotDesc').textContent=currentSpot.desc;
+  document.getElementById('spotPrice').textContent=currentSpot.price+' per person';
+  document.getElementById('spotDuration').textContent=currentSpot.duration;
+  document.getElementById('spotSeason').textContent='Best: '+currentSpot.season;
+  // Carousel
+  const ind=document.getElementById('spotIndicators'), inn=document.getElementById('spotInner');
+  ind.innerHTML=''; inn.innerHTML='';
+  currentSpot.imgs.forEach((img,i)=>{
+    const dot=document.createElement('button');
+    dot.type='button'; dot.setAttribute('data-bs-target','#spotCarousel'); dot.setAttribute('data-bs-slide-to',i); dot.setAttribute('aria-label','Slide '+(i+1));
+    if(i===0){dot.classList.add('active');dot.setAttribute('aria-current','true');}
+    ind.appendChild(dot);
+    const slide=document.createElement('div');
+    slide.className='carousel-item'+(i===0?' active':'');
+    slide.innerHTML=`<img src="${img.url}" class="spot-carousel-img" alt="${img.label}"/><div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent);padding:16px;"><p style="margin:0;color:rgba(255,255,255,0.85);font-size:0.85rem;"><i class="bi bi-camera-fill me-2"></i>${img.label}</p></div>`;
+    slide.style.position='relative';
+    inn.appendChild(slide);
+  });
+}
+
+function bookSpot() {
+  document.getElementById('bkDestination').value = currentSpot ? currentSpot.name+', '+currentSpot.state+', India' : '';
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('bkDate').setAttribute('min', today);
+  goStep(1,true);
+  new bootstrap.Modal(document.getElementById('bookingModal')).show();
+}
+
+function goStep(step, silent=false) {
+  if(!silent && step>1) {
+    if(step===2 && !validateStep1()) return;
+    if(step===3 && !validateStep2()) return;
+  }
+  document.getElementById('bookStep1').style.display='none';
+  document.getElementById('bookStep2').style.display='none';
+  document.getElementById('bookStep3').style.display='none';
+  ['step1dot','step2dot','step3dot'].forEach((id,i)=>document.getElementById(id).classList.toggle('active',i+1===step));
+  document.getElementById('bookStep'+step).style.display='block';
+  if(step===3) buildSummary();
+}
+
+function validateStep1() {
+  const n=document.getElementById('bkName').value.trim(), e=document.getElementById('bkEmail').value.trim(), p=document.getElementById('bkPhone').value.trim(), a=document.getElementById('bkAddress').value.trim();
+  if(!n){alert('Please enter your name');return false;} if(!e||!/\S+@\S+\.\S+/.test(e)){alert('Enter valid email');return false;} if(!p){alert('Enter phone number');return false;} if(!a){alert('Enter address');return false;} return true;
+}
+function validateStep2() {
+  const d=document.getElementById('bkDestination').value.trim(), dt=document.getElementById('bkDate').value, dy=document.getElementById('bkDays').value, ps=document.getElementById('bkPersons').value, tr=document.querySelector('input[name="transport"]:checked');
+  if(!d){alert('Enter destination');return false;} if(!dt){alert('Select date');return false;} if(!dy||dy<1){alert('Enter days');return false;} if(!ps||ps<1){alert('Enter travelers count');return false;} if(!tr){alert('Select transport mode');return false;} return true;
+}
+
+function buildSummary() {
+  const n=document.getElementById('bkName').value.trim(), e=document.getElementById('bkEmail').value.trim(), p=document.getElementById('bkPhone').value.trim(), a=document.getElementById('bkAddress').value.trim();
+  const d=document.getElementById('bkDestination').value, dt=document.getElementById('bkDate').value, dy=document.getElementById('bkDays').value, ps=document.getElementById('bkPersons').value, tr=document.querySelector('input[name="transport"]:checked')?.value||'';
+  const priceStr=(currentSpot?.price||'₹10,000').replace(/[₹,]/g,'');
+  const total=parseInt(priceStr)*parseInt(ps);
+  const dtf=dt?new Date(dt).toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'}):'';
+  document.getElementById('bookingSummary').innerHTML=`
+    <div class="summary-row"><span class="summary-label"><i class="bi bi-person-fill"></i> Name</span><span class="summary-value">${n}</span></div>
+    <div class="summary-row"><span class="summary-label"><i class="bi bi-envelope-fill"></i> Email</span><span class="summary-value">${e}</span></div>
+    <div class="summary-row"><span class="summary-label"><i class="bi bi-telephone-fill"></i> Phone</span><span class="summary-value">${p}</span></div>
+    <div class="summary-row"><span class="summary-label"><i class="bi bi-geo-alt-fill"></i> Address</span><span class="summary-value">${a}</span></div>
+    <div class="summary-row"><span class="summary-label"><i class="bi bi-map-fill"></i> Destination</span><span class="summary-value">${d}</span></div>
+    <div class="summary-row"><span class="summary-label"><i class="bi bi-calendar-event"></i> Date</span><span class="summary-value">${dtf}</span></div>
+    <div class="summary-row"><span class="summary-label"><i class="bi bi-moon-stars"></i> Days</span><span class="summary-value">${dy} Days</span></div>
+    <div class="summary-row"><span class="summary-label"><i class="bi bi-people-fill"></i> Travelers</span><span class="summary-value">${ps} Person(s)</span></div>
+    <div class="summary-row"><span class="summary-label"><i class="bi bi-send-fill"></i> Transport</span><span class="summary-value">${tr}</span></div>
+    <div class="summary-total"><span class="label">💰 Total Estimate</span><span class="amount">₹${total.toLocaleString('en-IN')}</span></div>`;
+}
+
+function submitBooking() {
+  const n=document.getElementById('bkName').value.trim(), e=document.getElementById('bkEmail').value.trim(), d=document.getElementById('bkDestination').value, dt=document.getElementById('bkDate').value, dy=document.getElementById('bkDays').value, ps=document.getElementById('bkPersons').value, tr=document.querySelector('input[name="transport"]:checked')?.value||'';
+  const priceStr=(currentSpot?.price||'₹10,000').replace(/[₹,]/g,'');
+  const total=parseInt(priceStr)*parseInt(ps);
+  const dtf=dt?new Date(dt).toLocaleDateString('en-IN',{month:'long',day:'numeric',year:'numeric'}):'';
+  bootstrap.Modal.getInstance(document.getElementById('bookingModal'))?.hide();
+  setTimeout(()=>{
+    document.getElementById('successDetails').innerHTML=`
+      <div class="success-detail-row"><span class="sk">👤 Name</span><span class="sv">${n}</span></div>
+      <div class="success-detail-row"><span class="sk">📧 Email</span><span class="sv">${e}</span></div>
+      <div class="success-detail-row"><span class="sk">🗺️ Destination</span><span class="sv">${d}</span></div>
+      <div class="success-detail-row"><span class="sk">📅 Date</span><span class="sv">${dtf}</span></div>
+      <div class="success-detail-row"><span class="sk">🌙 Days</span><span class="sv">${dy} Days</span></div>
+      <div class="success-detail-row"><span class="sk">👥 Travelers</span><span class="sv">${ps} Person(s)</span></div>
+      <div class="success-detail-row"><span class="sk">🚀 Transport</span><span class="sv">${tr}</span></div>
+      <div class="success-detail-row"><span class="sk">💰 Total</span><span class="sv">₹${total.toLocaleString('en-IN')}</span></div>`;
+    document.getElementById('successOverlay').style.display='flex';
+    document.body.style.overflow='hidden';
+  },400);
+}
+
+function closeSuccess() {
+  document.getElementById('successOverlay').style.display='none';
+  document.body.style.overflow='';
+}
+
+// Init
+showStates();
+</script>
+</body>
+</html>

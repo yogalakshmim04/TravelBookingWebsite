@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wanderlust — Travel Destination Showcase</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/animations.css"/>
+</head>
+<body>
+
+<!-- ======== NAVBAR ======== -->
+<nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+      <svg width="36" height="36" viewBox="0 0 38 38" fill="none">
+        <circle cx="19" cy="19" r="18" stroke="#e8a87c" stroke-width="1.5" fill="rgba(232,168,124,0.08)"/>
+        <path d="M19 7C19 7 27 14 27 20.5C27 25.5 23.5 29 19 29C14.5 29 11 25.5 11 20.5C11 14 19 7 19 7Z" fill="#e8a87c" opacity="0.85"/>
+        <circle cx="19" cy="20" r="3.8" fill="#0d1117"/>
+        <line x1="9" y1="19" x2="29" y2="19" stroke="#e8a87c" stroke-width="1" opacity="0.4"/>
+        <path d="M12 13.5 Q19 17.5 26 13.5" stroke="#e8a87c" stroke-width="0.9" fill="none" opacity="0.4"/>
+        <path d="M11.5 25 Q19 21 26.5 25" stroke="#e8a87c" stroke-width="0.9" fill="none" opacity="0.4"/>
+      </svg>
+      <span class="brand-name">Wander<span>lust</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+      <ul class="navbar-nav align-items-center">
+        <li class="nav-item"><a class="nav-link" href="#hero">Home</a></li>
+
+        <!-- Destinations Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Destinations</a>
+          <ul class="dropdown-menu nav-dropdown">
+            <li><a class="dropdown-item" href="./pages/europe.html" target="_blank"><i class="bi bi-geo-alt-fill me-2" style="color:#e8a87c"></i>Europe</a></li>
+            <li><a class="dropdown-item" href="./pages/asia.html" target="_blank"><i class="bi bi-geo-alt-fill me-2" style="color:#e8a87c"></i>Asia</a></li>
+            <li><a class="dropdown-item" href="./pages/india.html" target="_blank"><i class="bi bi-geo-alt-fill me-2" style="color:#e8a87c"></i>India</a></li>
+            <li><a class="dropdown-item" href="./pages/americas.html" target="_blank"><i class="bi bi-geo-alt-fill me-2" style="color:#e8a87c"></i>Americas</a></li>
+            <li><a class="dropdown-item" href="./pages/oceania.html" target="_blank"><i class="bi bi-geo-alt-fill me-2" style="color:#e8a87c"></i>Oceania</a></li>
+            <li><a class="dropdown-item" href="./pages/africa.html" target="_blank"><i class="bi bi-geo-alt-fill me-2" style="color:#e8a87c"></i>Africa</a></li>
+          </ul>
+        </li>
+
+        <!-- Company Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Company</a>
+          <ul class="dropdown-menu nav-dropdown">
+            <li><a class="dropdown-item" href="./pages/about.html" target="_blank"><i class="bi bi-building me-2" style="color:#e8a87c"></i>About Us</a></li>
+            <li><a class="dropdown-item" href="./pages/team.html" target="_blank"><i class="bi bi-people me-2" style="color:#e8a87c"></i>Our Team</a></li>
+            <li><a class="dropdown-item" href="./pages/careers.html" target="_blank"><i class="bi bi-briefcase me-2" style="color:#e8a87c"></i>Careers</a></li>
+            <li><a class="dropdown-item" href="./pages/blog.html" target="_blank"><i class="bi bi-journal-text me-2" style="color:#e8a87c"></i>Blog</a></li>
+            <li><a class="dropdown-item" href="./pages/contact.html" target="_blank"><i class="bi bi-envelope me-2" style="color:#e8a87c"></i>Contact</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="#testimonials">Reviews</a></li>
+        <li class="nav-item ms-3">
+          <button class="btn-primary-custom nav-book-btn" onclick="openBookingModal()">✈ Book Now</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ======== HERO ======== -->
+<section id="hero">
+  <div class="hero-bg-shapes"></div>
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6 hero-content">
+        <div class="hero-badge">✈ Explore The World</div>
+        <h1 class="hero-title">Discover Your Next <span class="highlight">Adventure</span></h1>
+        <p class="hero-desc">Journey through the world's most breathtaking destinations. From hidden temples to pristine beaches — your dream trip starts here.</p>
+        <div class="hero-buttons">
+          <a href="#destinations" class="btn-primary-custom">Explore Destinations</a>
+          <button class="btn-outline-custom" onclick="openBookingModal()">Book a Trip</button>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item"><span class="stat-number">120+</span><span class="stat-label">Destinations</span></div>
+          <div class="stat-divider"></div>
+          <div class="stat-item"><span class="stat-number">50K</span><span class="stat-label">Happy Travelers</span></div>
+          <div class="stat-divider"></div>
+          <div class="stat-item"><span class="stat-number">4.9★</span><span class="stat-label">Rating</span></div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="hero-image-grid position-relative">
+          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&q=80" class="hero-img-main" alt="Travel"/>
+          <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=300&q=80" class="hero-img-float" alt="Bali"/>
+          <div class="hero-img-badge"><span class="badge-number">4.9</span><span class="badge-label">⭐ Top Rated</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== DESTINATIONS ======== -->
+<section id="destinations">
+  <div class="container">
+    <div class="text-center fade-in-up">
+      <span class="section-label">Top Picks</span>
+      <h2 class="section-title">Popular Destinations</h2>
+      <div class="accent-line"></div>
+      <p class="section-subtitle">Handpicked destinations loved by thousands of travelers</p>
+    </div>
+    <div class="row g-4">
+
+      <div class="col-lg-4 col-md-6 fade-in-up">
+        <div class="destination-card" onclick="openDestModal('paris')">
+          <div class="card-img-wrapper"><img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=500&q=80" alt="Paris"/><span class="card-badge">🔥 Trending</span></div>
+          <div class="card-body-custom"><div class="card-country">🇫🇷 France</div><h3 class="card-title-custom">Paris</h3><p class="card-desc">The city of love and lights. Explore iconic landmarks, world-class cuisine, and timeless art.</p><div class="card-footer-custom"><div class="card-price">$1,299 <span>/ person</span></div><div class="card-rating">★★★★★ 4.9</div></div></div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 fade-in-up">
+        <div class="destination-card" onclick="openDestModal('bali')">
+          <div class="card-img-wrapper"><img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=500&q=80" alt="Bali"/><span class="card-badge">🌴 Popular</span></div>
+          <div class="card-body-custom"><div class="card-country">🇮🇩 Indonesia</div><h3 class="card-title-custom">Bali</h3><p class="card-desc">A tropical paradise of lush terraces, ancient temples, and vibrant spiritual culture.</p><div class="card-footer-custom"><div class="card-price">$899 <span>/ person</span></div><div class="card-rating">★★★★★ 4.8</div></div></div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 fade-in-up">
+        <div class="destination-card" onclick="openDestModal('tokyo')">
+          <div class="card-img-wrapper"><img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=500&q=80" alt="Tokyo"/><span class="card-badge">⭐ Top Rated</span></div>
+          <div class="card-body-custom"><div class="card-country">🇯🇵 Japan</div><h3 class="card-title-custom">Tokyo</h3><p class="card-desc">Ancient tradition meets futuristic innovation in this electric city of neon and cherry blossoms.</p><div class="card-footer-custom"><div class="card-price">$1,499 <span>/ person</span></div><div class="card-rating">★★★★★ 4.9</div></div></div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 fade-in-up">
+        <div class="destination-card" onclick="openDestModal('maldives')">
+          <div class="card-img-wrapper"><img src="https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=500&q=80" alt="Maldives"/><span class="card-badge">💎 Luxury</span></div>
+          <div class="card-body-custom"><div class="card-country">🇲🇻 Maldives</div><h3 class="card-title-custom">Maldives</h3><p class="card-desc">Crystal-clear lagoons and overwater bungalows — the ultimate luxury escape you deserve.</p><div class="card-footer-custom"><div class="card-price">$2,199 <span>/ person</span></div><div class="card-rating">★★★★★ 5.0</div></div></div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 fade-in-up">
+        <div class="destination-card" onclick="openDestModal('santorini')">
+          <div class="card-img-wrapper"><img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=500&q=80" alt="Santorini"/><span class="card-badge">🌅 Scenic</span></div>
+          <div class="card-body-custom"><div class="card-country">🇬🇷 Greece</div><h3 class="card-title-custom">Santorini</h3><p class="card-desc">Iconic white-washed cliffs, caldera sunsets, and warm Aegean hospitality at its finest.</p><div class="card-footer-custom"><div class="card-price">$1,399 <span>/ person</span></div><div class="card-rating">★★★★★ 4.8</div></div></div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 fade-in-up">
+        <div class="destination-card" onclick="openDestModal('kerala')">
+          <div class="card-img-wrapper"><img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=500&q=80" alt="Kerala"/><span class="card-badge">🇮🇳 India's Best</span></div>
+          <div class="card-body-custom"><div class="card-country">🇮🇳 India — Kerala</div><h3 class="card-title-custom">Kerala</h3><p class="card-desc">God's Own Country. Backwaters, Munnar tea estates, Wayanad forests, and Ayurvedic bliss.</p><div class="card-footer-custom"><div class="card-price">$499 <span>/ person</span></div><div class="card-rating">★★★★★ 4.9</div></div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ======== WHY US ======== -->
+<section id="why-us">
+  <div class="container">
+    <div class="text-center fade-in-up">
+      <span class="section-label">Why Us</span>
+      <h2 class="section-title">Travel With Confidence</h2>
+      <div class="accent-line"></div>
+      <p class="section-subtitle">We make every journey unforgettable</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-3 col-md-6 fade-in-up"><div class="feature-card"><div class="feature-icon"><i class="bi bi-shield-check"></i></div><h4 class="feature-title">Safe & Secure</h4><p class="feature-desc">Every trip fully insured and meticulously planned for your safety.</p></div></div>
+      <div class="col-lg-3 col-md-6 fade-in-up"><div class="feature-card"><div class="feature-icon"><i class="bi bi-headset"></i></div><h4 class="feature-title">24/7 Support</h4><p class="feature-desc">Our expert travel team is available around the clock anywhere in the world.</p></div></div>
+      <div class="col-lg-3 col-md-6 fade-in-up"><div class="feature-card"><div class="feature-icon"><i class="bi bi-cash-coin"></i></div><h4 class="feature-title">Best Price</h4><p class="feature-desc">We guarantee the best rates. Found cheaper? We'll match it, no questions asked.</p></div></div>
+      <div class="col-lg-3 col-md-6 fade-in-up"><div class="feature-card"><div class="feature-icon"><i class="bi bi-map"></i></div><h4 class="feature-title">Custom Itineraries</h4><p class="feature-desc">Personalized plans crafted around your timeline, budget and dream experiences.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== GALLERY ======== -->
+<section id="gallery">
+  <div class="container">
+    <div class="text-center fade-in-up">
+      <span class="section-label">Moments</span>
+      <h2 class="section-title">Travel Gallery</h2>
+      <div class="accent-line"></div>
+      <p class="section-subtitle">Memories captured across the globe</p>
+    </div>
+    <div class="gallery-grid fade-in-up">
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80" alt="Swiss Alps"/><div class="gallery-overlay"><span class="gallery-overlay-text"><i class="bi bi-geo-alt-fill"></i> Swiss Alps, Switzerland</span></div></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=600&q=80" alt="London"/><div class="gallery-overlay"><span class="gallery-overlay-text"><i class="bi bi-geo-alt-fill"></i> Tower Bridge, London</span></div></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1520260497591-112f2f40a3f4?w=600&q=80" alt="Bali Resort"/><div class="gallery-overlay"><span class="gallery-overlay-text"><i class="bi bi-geo-alt-fill"></i> Infinity Pool, Bali</span></div></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1526495124232-a04e1849168c?w=600&q=80" alt="Hong Kong"/><div class="gallery-overlay"><span class="gallery-overlay-text"><i class="bi bi-geo-alt-fill"></i> Victoria Harbour, Hong Kong</span></div></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=600&q=80" alt="Munnar"/><div class="gallery-overlay"><span class="gallery-overlay-text"><i class="bi bi-geo-alt-fill"></i> Munnar Tea Gardens, Kerala</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== TESTIMONIALS ======== -->
+<section id="testimonials">
+  <div class="container">
+    <div class="text-center fade-in-up">
+      <span class="section-label">Reviews</span>
+      <h2 class="section-title">Traveler Stories</h2>
+      <div class="accent-line"></div>
+      <p class="section-subtitle">Real experiences from real adventurers</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6 fade-in-up"><div class="testimonial-card"><span class="verified-badge">✓ Verified</span><div class="testimonial-quote">"</div><p class="testimonial-text">Our Bali trip was absolutely magical. Every detail was perfect — from the rice terrace sunrise to the beachside dinner. Wanderlust made it completely effortless!</p><div class="testimonial-author"><img src="https://randomuser.me/api/portraits/women/44.jpg" class="author-avatar" alt="Sarah"/><div><div class="stars">★★★★★</div><div class="author-name">Sarah Mitchell</div><div class="author-location">📍 London, UK</div></div></div></div></div>
+      <div class="col-lg-4 col-md-6 fade-in-up"><div class="testimonial-card"><span class="verified-badge">✓ Verified</span><div class="testimonial-quote">"</div><p class="testimonial-text">Tokyo blew my mind! The custom itinerary was perfect — cherry blossom parks by day, ramen tours by night. Best travel decision of my entire life!</p><div class="testimonial-author"><img src="https://randomuser.me/api/portraits/men/32.jpg" class="author-avatar" alt="James"/><div><div class="stars">★★★★★</div><div class="author-name">James Rodriguez</div><div class="author-location">📍 New York, USA</div></div></div></div></div>
+      <div class="col-lg-4 col-md-6 fade-in-up"><div class="testimonial-card"><span class="verified-badge">✓ Verified</span><div class="testimonial-quote">"</div><p class="testimonial-text">Kerala backwaters were unreal! Houseboat at sunset, fresh coconut cuisine, Wayanad jungle trek — Wanderlust covered everything perfectly. God's Own Country!</p><div class="testimonial-author"><img src="https://randomuser.me/api/portraits/women/68.jpg" class="author-avatar" alt="Priya"/><div><div class="stars">★★★★★</div><div class="author-name">Priya Sharma</div><div class="author-location">📍 Mumbai, India</div></div></div></div></div>
+      <div class="col-lg-4 col-md-6 fade-in-up"><div class="testimonial-card"><span class="verified-badge">✓ Verified</span><div class="testimonial-quote">"</div><p class="testimonial-text">Maldives overwater bungalow was a once-in-a-lifetime experience. Crystal water, silence, stars at night — pure paradise. 10/10 would book again with Wanderlust!</p><div class="testimonial-author"><img src="https://randomuser.me/api/portraits/men/54.jpg" class="author-avatar" alt="David"/><div><div class="stars">★★★★★</div><div class="author-name">David Chen</div><div class="author-location">📍 Singapore</div></div></div></div></div>
+      <div class="col-lg-4 col-md-6 fade-in-up"><div class="testimonial-card"><span class="verified-badge">✓ Verified</span><div class="testimonial-quote">"</div><p class="testimonial-text">Paris was everything I imagined and so much more. The food, the culture, the Eiffel Tower at night — Wanderlust handled every detail flawlessly. Planning my next trip already!</p><div class="testimonial-author"><img src="https://randomuser.me/api/portraits/women/22.jpg" class="author-avatar" alt="Emma"/><div><div class="stars">★★★★★</div><div class="author-name">Emma Laurent</div><div class="author-location">📍 Toronto, Canada</div></div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== NEWSLETTER ======== -->
+<section id="newsletter">
+  <div class="container">
+    <div class="newsletter-content text-center fade-in-up">
+      <h2 class="newsletter-title">Ready for Your Next Adventure?</h2>
+      <p class="newsletter-desc">Subscribe for exclusive deals, travel tips, and destination guides.</p>
+      <div class="newsletter-form">
+        <input type="email" class="newsletter-input" id="newsletterEmail" placeholder="Enter your email address..."/>
+        <button class="btn-primary-custom" onclick="handleSubscribe()">Subscribe ✈</button>
+      </div>
+      <p class="newsletter-note">No spam, ever. Unsubscribe anytime.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======== FOOTER ======== -->
+<footer>
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <span class="footer-brand">Wanderlust</span>
+        <p class="footer-desc">Making every journey unforgettable since 2015. Your trusted partner for world-class travel experiences.</p>
+        <div class="social-icons">
+          <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="social-icon"><i class="bi bi-twitter-x"></i></a>
+          <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="social-icon"><i class="bi bi-youtube"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-2 col-6">
+        <div class="footer-heading">Destinations</div>
+        <ul class="footer-links">
+          <li><a href="pages/europe.html" target="_blank">Europe</a></li>
+          <li><a href="pages/asia.html" target="_blank">Asia</a></li>
+          <li><a href="pages/india.html" target="_blank">India</a></li>
+          <li><a href="pages/americas.html" target="_blank">Americas</a></li>
+          <li><a href="pages/oceania.html" target="_blank">Oceania</a></li>
+          <li><a href="pages/africa.html" target="_blank">Africa</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2 col-6">
+        <div class="footer-heading">Company</div>
+        <ul class="footer-links">
+          <li><a href="pages/about.html" target="_blank">About Us</a></li>
+          <li><a href="pages/team.html" target="_blank">Our Team</a></li>
+          <li><a href="pages/careers.html" target="_blank">Careers</a></li>
+          <li><a href="pages/blog.html" target="_blank">Blog</a></li>
+          <li><a href="pages/contact.html" target="_blank">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4">
+        <div class="footer-heading">Contact Us</div>
+        <ul class="footer-links">
+          <li><a href="#"><i class="bi bi-envelope me-2"></i>hello@wanderlust.com</a></li>
+          <li><a href="#"><i class="bi bi-telephone me-2"></i>+1 (800) 123-4567</a></li>
+          <li><a href="#"><i class="bi bi-geo-alt me-2"></i>New York, USA</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-divider">
+      <p class="footer-bottom-text">© 2026 <span>Wanderlust</span> Travel. All rights reserved. Made with ❤️ for adventurers.</p>
+    </div>
+  </div>
+</footer>
+
+<button id="scrollTop"><i class="bi bi-arrow-up"></i></button>
+
+<!-- ======== DESTINATION DETAIL MODAL (with Carousel) ======== -->
+<div class="modal fade" id="destModal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content dest-modal-content">
+      <div class="modal-header dest-modal-header">
+        <h5 class="modal-title dest-modal-title" id="destModalTitle"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-0">
+        <div id="destCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-indicators" id="carouselIndicators"></div>
+          <div class="carousel-inner" id="carouselInner"></div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#destCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+          <button class="carousel-control-next" type="button" data-bs-target="#destCarousel" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+        </div>
+        <div class="dest-info p-4">
+          <p id="destModalDesc" class="dest-desc"></p>
+          <div class="row g-3 mb-4">
+            <div class="col-6"><div class="dest-detail"><i class="bi bi-cash-coin"></i><span id="destPrice"></span></div></div>
+            <div class="col-6"><div class="dest-detail"><i class="bi bi-clock"></i><span id="destDuration"></span></div></div>
+            <div class="col-6"><div class="dest-detail"><i class="bi bi-calendar3"></i><span id="destSeason"></span></div></div>
+            <div class="col-6"><div class="dest-detail"><i class="bi bi-star-fill" style="color:#ffd700"></i><span id="destRating"></span></div></div>
+          </div>
+          <button class="btn-primary-custom w-100 d-block text-center" onclick="bookFromDest()">✈ Book This Trip Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== BOOKING MODAL (3 Steps) ======== -->
+<div class="modal fade" id="bookingModal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content booking-modal-content">
+      <div class="modal-header booking-modal-header">
+        <div>
+          <h5 class="modal-title booking-modal-title">✈ Book Your Dream Trip</h5>
+          <p class="booking-modal-sub">Fill in your details and we'll confirm your booking!</p>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body booking-body">
+        <!-- Step Indicators -->
+        <div class="booking-steps mb-4">
+          <div class="step active" id="step1dot"><span class="step-num">1</span> Personal</div>
+          <div class="step-line"></div>
+          <div class="step" id="step2dot"><span class="step-num">2</span> Trip</div>
+          <div class="step-line"></div>
+          <div class="step" id="step3dot"><span class="step-num">3</span> Confirm</div>
+        </div>
+
+        <!-- STEP 1 -->
+        <div id="bookStep1">
+          <h6 class="step-section-title"><i class="bi bi-person-fill"></i> Personal Information</h6>
+          <div class="row g-3">
+            <div class="col-md-6"><label class="form-label-custom">Full Name *</label><input type="text" class="form-input-custom" id="bkName" placeholder="e.g. John Smith"/></div>
+            <div class="col-md-6"><label class="form-label-custom">Email Address *</label><input type="email" class="form-input-custom" id="bkEmail" placeholder="john@example.com"/></div>
+            <div class="col-md-6"><label class="form-label-custom">Phone Number *</label><input type="tel" class="form-input-custom" id="bkPhone" placeholder="+1 234 567 8900"/></div>
+            <div class="col-md-6"><label class="form-label-custom">Full Address *</label><input type="text" class="form-input-custom" id="bkAddress" placeholder="123 Street, City, Country"/></div>
+          </div>
+          <div class="d-flex justify-content-end mt-4"><button class="btn-primary-custom" onclick="goStep(2)">Next: Trip Details →</button></div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div id="bookStep2" style="display:none;">
+          <h6 class="step-section-title"><i class="bi bi-airplane-fill"></i> Trip Details</h6>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label-custom">Destination *</label>
+              <select class="form-input-custom" id="bkDestination">
+                <option value="">Select Destination</option>
+                <option>Paris, France</option><option>Bali, Indonesia</option><option>Tokyo, Japan</option>
+                <option>Maldives</option><option>Santorini, Greece</option><option>Kerala, India</option>
+                <option>Switzerland, Europe</option><option>Rome, Italy</option><option>New York, USA</option>
+              </select>
+            </div>
+            <div class="col-md-6"><label class="form-label-custom">Travel Date *</label><input type="date" class="form-input-custom" id="bkDate"/></div>
+            <div class="col-md-6"><label class="form-label-custom">Number of Days *</label><input type="number" class="form-input-custom" id="bkDays" placeholder="e.g. 7" min="1" max="60"/></div>
+            <div class="col-md-6"><label class="form-label-custom">Number of Travelers *</label><input type="number" class="form-input-custom" id="bkPersons" placeholder="e.g. 2" min="1" max="30"/></div>
+            <div class="col-12">
+              <label class="form-label-custom">Mode of Transport *</label>
+              <div class="transport-options">
+                <label class="transport-opt"><input type="radio" name="transport" value="✈ Flight"/><span>✈ Flight</span></label>
+                <label class="transport-opt"><input type="radio" name="transport" value="🚢 Cruise"/><span>🚢 Cruise</span></label>
+                <label class="transport-opt"><input type="radio" name="transport" value="🚂 Train"/><span>🚂 Train</span></label>
+                <label class="transport-opt"><input type="radio" name="transport" value="🚌 Bus"/><span>🚌 Bus</span></label>
+                <label class="transport-opt"><input type="radio" name="transport" value="🚗 Car"/><span>🚗 Car</span></label>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between mt-4">
+            <button class="btn-outline-custom" style="margin-left:0;" onclick="goStep(1)">← Back</button>
+            <button class="btn-primary-custom" onclick="goStep(3)">Next: Confirm →</button>
+          </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div id="bookStep3" style="display:none;">
+          <h6 class="step-section-title"><i class="bi bi-check-circle-fill"></i> Booking Summary</h6>
+          <div class="booking-summary" id="bookingSummary"></div>
+          <div class="d-flex justify-content-between mt-4">
+            <button class="btn-outline-custom" style="margin-left:0;" onclick="goStep(2)">← Back</button>
+            <button class="btn-primary-custom" onclick="submitBooking()"><i class="bi bi-check2-circle me-2"></i>Confirm Booking</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== SUCCESS POPUP ======== -->
+<div id="successOverlay" class="success-overlay" style="display:none;">
+  <div class="success-box">
+    <div class="success-anim">✈</div>
+    <h3 class="success-title">Booking Successful! 🎉</h3>
+    <p class="success-subtitle">Your trip has been booked! We'll contact you on your email & phone shortly.</p>
+    <div class="success-details" id="successDetails"></div>
+    <button class="btn-primary-custom mt-4" onclick="closeSuccess()">Awesome, Let's Go! 🌍</button>
+  </div>
+</div>
+
+<!-- ======== SCRIPTS ======== -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/script.js"></script>
+
+<!-- ======== DROPDOWN CUSTOM STYLES ======== -->
+<style>
+.nav-dropdown {
+  background: rgba(13,17,23,0.98) !important;
+  border: 1px solid rgba(232,168,124,0.2) !important;
+  border-radius: 14px !important;
+  backdrop-filter: blur(14px);
+  padding: 8px !important;
+  min-width: 190px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+.nav-dropdown .dropdown-item {
+  color: rgba(255,255,255,0.65) !important;
+  font-size: 0.87rem;
+  font-family: 'Poppins', sans-serif;
+  padding: 10px 16px;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+.nav-dropdown .dropdown-item:hover {
+  background: rgba(232,168,124,0.12) !important;
+  color: #e8a87c !important;
+}
+.brand-name { font-family: 'Playfair Display', serif; font-size: 1.7rem; color: #e8a87c; font-weight: 700; }
+.brand-name span { color: #fff; }
+.nav-book-btn { padding: 10px 22px; font-size: 0.85rem; border: none; cursor: pointer; }
+</style>
+
+</body>
+</html>
